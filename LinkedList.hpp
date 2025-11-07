@@ -1,0 +1,179 @@
+#pragma once
+#include <iostream>
+
+// Node structure
+template <typename T>
+struct Node {
+	T data;
+	Node* next;
+	Node* prev;
+	Node(): data(), next(nullptr), prev(nullptr) {}
+	Node(const T& data): data(data), next(nullptr), prev(nullptr) {}
+};
+
+// LinkedList class
+template <typename T>
+class LinkedList {
+
+public:
+
+	// Behaviors
+	void printForward() const{
+
+		Node<T>* currentNode = head;
+		if(currentNode){
+
+			for(unsigned int i = 0; i < count; ++i){
+
+				std::cout << currentNode -> data << " ";
+				currentNode = currentNode -> next;
+			}
+		}
+	};
+
+	void printReverse() const{
+
+		Node<T>* currentNode = tail;
+		if(currentNode){
+			for(unsigned int i = 0; i < count; ++i){
+
+				std::cout << currentNode -> data << " ";
+				currentNode = currentNode -> prev;
+			}
+		}
+	};
+
+	// Accessors
+	[[nodiscard]] unsigned int getCount() const{return count;};
+	Node* getHead(){return head;};
+	const Node* getHead() const{return head;};
+	Node* getTail(){return tail;};
+	const Node* getTail() const{return tail;};
+
+	// Insertion
+	void addHead(const T& data){
+
+		Node<T>* newHead = new Node(data);
+		newHead -> next = head;
+		head -> prev = &newHead;
+		head = &newHead;
+		count ++;
+	};
+
+	void addTail(const T& data){
+
+		Node<T>* newTail = new Node(data);
+		newTail -> prev = tail;
+		tail -> next = &newTail;
+		tail = &newTail;
+		count ++;
+	};
+
+	// Removal
+	bool removeHead(){
+
+		if (head == nullptr) {return false;};
+		Node<T>* oldHead = head;
+		head = head -> next;
+		head -> prev = nullptr;	
+		delete oldHead;
+		count --;
+		return true;
+	};
+
+	bool removeTail(){
+
+		if (tail == nullptr) {return false;}
+		Node<T>* oldTail = tail;
+		tail = tail -> prev;
+		tail -> next = nullptr;	
+		delete oldTail;
+		count --;
+		return true;
+	};
+
+	void Clear(){
+
+		for(unsigned int i = 0; i < count; i++){
+			Node<T>* temp = head;
+			head = head -> next;
+			delete temp;
+		}
+
+		head = nullptr;
+		tail = nullptr;
+		count = 0;
+	};
+
+	// Operators
+	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept{
+
+		if(this == &other){
+			return *this;
+		}
+
+		Clear();
+		head = other.head;
+		tail = other.tail;
+		count = other.count;
+		other.head = nullptr;
+		other.tail = nullptr;
+		other.count = 0;
+		return *this;
+	};
+
+	LinkedList<T>& operator=(const LinkedList<T>& rhs){
+
+		if(this == &rhs){
+			return *this;
+		}
+
+		Clear();
+		Node<T>* temp = rhs.getHead();
+
+		while(temp){
+
+			addTail(temp -> data);
+			temp = temp -> next;
+		}
+
+		return *this;
+	};
+
+	// Construction/Destruction
+	LinkedList() : head(nullptr), tail(nullptr), count(0){};
+
+	LinkedList(const LinkedList<T>& list){
+
+		Node<T>* temp = list.getHead();
+
+		while(temp){
+
+			addTail(temp -> data);
+			temp = temp -> next;
+		}
+	};
+
+	LinkedList(LinkedList<T>&& other) noexcept{
+
+		head = other.head;
+		tail = other.tail;
+		count = other.count;
+		other.head = nullptr;
+		other.tail = nullptr;
+		other.count = 0;
+	};
+
+	~LinkedList(){
+		Clear();
+	};
+
+private:
+	// Stores pointers to first and last nodes and count
+	Node<T>* head;
+	Node<T>* tail;
+	unsigned int count;
+
+};
+
+
