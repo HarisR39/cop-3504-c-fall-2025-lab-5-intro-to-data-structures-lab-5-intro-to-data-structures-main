@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <stdexcept>
 #include "Interfaces.hpp"
+#include <iostream>
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
 using std::size_t;
@@ -81,7 +82,7 @@ public:
         return *this;
     };
 
-    ~ABQ() noexcept override{
+    ~ABQ() noexcept{
 
         delete[] array_;
     };
