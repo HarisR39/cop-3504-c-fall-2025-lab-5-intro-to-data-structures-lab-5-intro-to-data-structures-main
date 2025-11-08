@@ -31,16 +31,16 @@ public:
     // Core Removal Operations
     T popFront() override{
 
-        Node<T>* temp = list.getHead();
+        T temp = (list.getHead()) -> data;
         list.removeHead();
-        return temp -> data;
+        return temp;
     };
 
     T popBack() override{
 
-        Node<T>* temp = list.getTail();
+        T temp = (list.getTail()) -> data;
         list.removeTail();
-        return temp -> data;
+        return temp;
     };
 
     // Element Accessors
