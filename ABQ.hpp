@@ -33,7 +33,7 @@ public:
 
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
-        array_ = T[capacity_];
+        array_ = new T[capacity_];
         for (size_t i = 0; i < curr_size_; ++i) {
             array_[i] = other.array_[i];
         }
@@ -41,12 +41,12 @@ public:
 
     ABQ& operator=(const ABQ& rhs){
 
-        if(this = &rhs){return *this;}
+        if(this == &rhs){return *this;}
         
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
         delete[] array_;
-        array_ = T[capacity_];
+        array_ = new T[capacity_];
 
         for (size_t i = 0; i < curr_size_; ++i) {
             array_[i] = rhs.array_[i];
@@ -68,7 +68,7 @@ public:
 
     ABQ& operator=(ABQ&& rhs) noexcept{
 
-        if(this = &rhs){return *this;}
+        if(this == &rhs){return *this;}
 
         capacityrhs.capacity_;
         rhs.capacity_ = 0;
