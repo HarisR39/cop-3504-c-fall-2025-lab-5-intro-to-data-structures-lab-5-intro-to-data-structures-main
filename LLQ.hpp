@@ -22,13 +22,18 @@ public:
     // Deletion
     T dequeue() override{
 
-        Node<T>* temp = list.getHead();
+        if(!(list.getHead())){throw std::runtime_error("Queue is empty");}
+        T temp = (list.getHead()) -> data;
         list.removeHead();
-        return temp -> data;
+        return temp;
     };
 
     // Access
-    T peek() const override {return (list.getHead()) -> data;};
+    T peek() const override {
+        
+        if(!(list.getHead())){throw std::runtime_error("The deque is empty");}
+        return (list.getHead()) -> data;
+    };
 
     // Getter
     std::size_t getSize() const noexcept override{return list.getCount();};
