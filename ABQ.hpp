@@ -43,8 +43,8 @@ public:
 
         if(this == &rhs){return *this;}
         
-        capacity_ = other.capacity_;
-        curr_size_ = other.curr_size_;
+        capacity_ = rhs.capacity_;
+        curr_size_ = rhs.curr_size_;
         delete[] array_;
         array_ = new T[capacity_];
 
@@ -70,18 +70,20 @@ public:
 
         if(this == &rhs){return *this;}
 
-        capacityrhs.capacity_;
+        capacity_ = rhs.capacity_;
         rhs.capacity_ = 0;
         curr_size_ = rhs.curr_size_;
         rhs.curr_size_ = 0;
         delete[] array_;
         array_ = rhs.array_;
         rhs.array_ = nullptr;
+
+        return *this;
     };
 
     ~ABQ() noexcept override{
 
-        delete[] array_
+        delete[] array_;
     };
 
     // Getters
@@ -122,11 +124,12 @@ public:
         if (curr_size_ == 0) {throw std::runtime_error("The queue is empty");}
         T front = array_[0];
 
-        for(size_t i = 0; i < curr_size_; i++){
+        for(size_t i = 0; i < curr_size_ - 1; i++){
 
             array_[i] = array_[i+1];
         }
 
+        curr_size_ --;
         return front;
     };
 
@@ -140,7 +143,7 @@ public:
 
     void PrintReverse(){
 
-        for(size_t i = curr_size_; i <= 0; --i){
+        for(size_t i = curr_size_ - 1; i <= 0; --i){
 
             std::cout << array_[i] << std::endl;
         }
