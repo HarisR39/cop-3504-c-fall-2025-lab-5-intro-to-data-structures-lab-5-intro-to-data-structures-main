@@ -26,7 +26,7 @@ public:
 
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
-        array_ = T[capacity_];
+        array_ = new T[capacity_];
         for (size_t i = 0; i < curr_size_; ++i) {
             array_[i] = other.array_[i];
         }
@@ -34,12 +34,12 @@ public:
 
     ABS& operator=(const ABS& rhs){
 
-        if(this = &rhs){return *this;}
+        if(this == &rhs) {return *this;}
         
-        capacity_ = other.capacity_;
-        curr_size_ = other.curr_size_;
+        capacity_ = rhs.capacity_;
+        curr_size_ = rhs.curr_size_;
         delete[] array_;
-        array_ = T[capacity_];
+        array_ = new T[capacity_];
 
         for (size_t i = 0; i < curr_size_; ++i) {
             array_[i] = rhs.array_[i];
@@ -61,20 +61,22 @@ public:
 
     ABS& operator=(ABS&& rhs) noexcept{
 
-        if(this = &rhs){return *this;}
+        if(this == &rhs) {return *this;}
 
-        capacityrhs.capacity_;
+        capacity_ = rhs.capacity_;
         rhs.capacity_ = 0;
         curr_size_ = rhs.curr_size_;
         rhs.curr_size_ = 0;
         delete[] array_;
         array_ = rhs.array_;
         rhs.array_ = nullptr;
+
+        return *this
     };
 
-    ~ABS() noexcept override{
+    ~ABS() noexcept{
 
-        delete[] array_
+        delete[] array_;
     };
 
     // Get the number of items in the ABS
