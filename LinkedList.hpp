@@ -7,8 +7,8 @@ struct Node {
 	T data;
 	Node* next;
 	Node* prev;
-	Node(): data(), next(nullptr), prev(nullptr) {}
-	Node(const T& data): data(data), next(nullptr), prev(nullptr) {}
+	Node(): data(), next(nullptr), prev(nullptr) {};
+	Node(const T& data): data(data), next(nullptr), prev(nullptr) {};
 };
 
 // LinkedList class
