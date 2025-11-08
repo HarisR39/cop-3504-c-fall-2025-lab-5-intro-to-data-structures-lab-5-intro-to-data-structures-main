@@ -31,6 +31,7 @@ public:
     // Core Removal Operations
     T popFront() override{
 
+        if (!list.getHead()) {throw std::runtime_error("Deque is empty");}
         T temp = (list.getHead()) -> data;
         list.removeHead();
         return temp;
@@ -38,6 +39,7 @@ public:
 
     T popBack() override{
 
+        if (!list.getTail()) {throw std::runtime_error("Deque is empty");}
         T temp = (list.getTail()) -> data;
         list.removeTail();
         return temp;
