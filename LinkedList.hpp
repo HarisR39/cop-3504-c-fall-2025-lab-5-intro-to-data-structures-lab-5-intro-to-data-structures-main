@@ -55,8 +55,8 @@ public:
 
 		Node<T>* newHead = new Node(data);
 		newHead -> next = head;
-		head -> prev = &newHead;
-		head = &newHead;
+		head -> prev = newHead;
+		head = newHead;
 		count ++;
 	};
 
@@ -64,8 +64,8 @@ public:
 
 		Node<T>* newTail = new Node(data);
 		newTail -> prev = tail;
-		tail -> next = &newTail;
-		tail = &newTail;
+		tail -> next = newTail;
+		tail = newTail;
 		count ++;
 	};
 
@@ -92,7 +92,7 @@ public:
 		return true;
 	};
 
-	void Clear(){
+	void clear(){
 
 		for(unsigned int i = 0; i < count; i++){
 			Node<T>* temp = head;
@@ -112,7 +112,7 @@ public:
 			return *this;
 		}
 
-		Clear();
+		clear();
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
@@ -128,8 +128,8 @@ public:
 			return *this;
 		}
 
-		Clear();
-		Node<T>* temp = rhs.getHead();
+		clear();
+		const Node<T>* temp = rhs.getHead();
 
 		while(temp){
 
@@ -145,7 +145,7 @@ public:
 
 	LinkedList(const LinkedList<T>& list){
 
-		Node<T>* temp = list.getHead();
+		const Node<T>* temp = list.getHead();
 
 		while(temp){
 
@@ -165,7 +165,7 @@ public:
 	};
 
 	~LinkedList(){
-		Clear();
+		clear();
 	};
 
 private:
