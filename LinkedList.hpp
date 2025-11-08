@@ -81,7 +81,8 @@ public:
 		if (head == nullptr) {return false;};
 		Node<T>* oldHead = head;
 		head = head -> next;
-		head -> prev = nullptr;	
+		if(head) {head -> prev = nullptr;}
+		else{tail = nullptr;}
 		delete oldHead;
 		count --;
 		return true;
@@ -92,7 +93,8 @@ public:
 		if (tail == nullptr) {return false;}
 		Node<T>* oldTail = tail;
 		tail = tail -> prev;
-		tail -> next = nullptr;	
+		if(tail) {tail -> next = nullptr;}
+		else{head = nullptr;}
 		delete oldTail;
 		count --;
 		return true;
@@ -149,7 +151,7 @@ public:
 	// Construction/Destruction
 	LinkedList() : head(nullptr), tail(nullptr), count(0){};
 
-	LinkedList(const LinkedList<T>& list){
+	LinkedList(const LinkedList<T>& list): head(nullptr), tail(nullptr), count(0){
 
 		const Node<T>* temp = list.getHead();
 
