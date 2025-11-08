@@ -53,8 +53,8 @@ public:
 	// Insertion
 	void addHead(const T& data){
 
-		Node<T>* newHead = new Node(data);
-		newHead -> prev = head;
+		Node<T>* newHead = new Node<T>(data);
+		newHead -> next = head;
 
 		if (head) {head -> prev = newHead;} 
 		else {tail = newHead;}
@@ -65,7 +65,7 @@ public:
 
 	void addTail(const T& data){
 
-		Node<T>* newTail = new Node(data);
+		Node<T>* newTail = new Node<T>(data);
 		newTail -> prev = tail;
 
 		if (tail) {tail -> next = newTail;} 
