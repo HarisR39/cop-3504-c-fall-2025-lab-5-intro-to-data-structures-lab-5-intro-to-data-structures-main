@@ -44,8 +44,17 @@ public:
     };
 
     // Element Accessors
-    const T& front() const override{}{return (list.getHead()) -> data;};
-    const T& back() const override{return (list.getTail()) -> data;};
+    const T& front() const override{
+
+        if(!(list.getHead())){throw std::runtime_error("The deque is empty");}
+        return (list.getHead()) -> data;
+    };
+
+    const T& back() const override{
+
+        if(!(list.getHead())){throw std::runtime_error("The deque is empty");}
+        return (list.getTail()) -> data;
+    };
 
     // Getter
     std::size_t getSize() const noexcept override{return list.getCount();};

@@ -54,8 +54,11 @@ public:
 	void addHead(const T& data){
 
 		Node<T>* newHead = new Node(data);
-		newHead -> next = head;
-		head -> prev = newHead;
+		newHead -> prev = head;
+
+		if (head) {head -> prev = newHead;} 
+		else {tail = newHead;}
+		
 		head = newHead;
 		count ++;
 	};
@@ -64,7 +67,10 @@ public:
 
 		Node<T>* newTail = new Node(data);
 		newTail -> prev = tail;
-		tail -> next = newTail;
+
+		if (tail) {tail -> next = newTail;} 
+		else {head = newTail;}
+
 		tail = newTail;
 		count ++;
 	};
