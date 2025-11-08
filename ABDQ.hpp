@@ -82,7 +82,7 @@ public:
         return *this;
     };
 
-    ~ABDQ() override {
+    ~ABDQ(){
         delete[] data_;
     };
 
