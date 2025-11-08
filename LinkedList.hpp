@@ -45,10 +45,10 @@ public:
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const{return count;};
-	Node* getHead(){return head;};
-	const Node* getHead() const{return head;};
-	Node* getTail(){return tail;};
-	const Node* getTail() const{return tail;};
+	Node<T>* getHead(){return head;};
+	const Node<T>* getHead() const{return head;};
+	Node<T>* getTail(){return tail;};
+	const Node<T>* getTail() const{return tail;};
 
 	// Insertion
 	void addHead(const T& data){
