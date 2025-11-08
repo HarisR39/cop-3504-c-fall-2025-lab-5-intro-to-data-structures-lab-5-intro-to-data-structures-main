@@ -71,7 +71,7 @@ public:
         array_ = rhs.array_;
         rhs.array_ = nullptr;
 
-        return *this
+        return *this;
     };
 
     ~ABS() noexcept{
